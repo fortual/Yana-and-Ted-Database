@@ -8,5 +8,7 @@
 </head>
 <body>
            <a><b>You have been successfully registered.</b></a>
+           <form action="homePage.jsp" method="post"><input type="submit"
+            value="continue" /> </form>
 </body>
 </html>
