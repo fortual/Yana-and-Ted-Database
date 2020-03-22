@@ -7,8 +7,11 @@
 </head>
 <body>
 <h1>Enter your login information</h1>
-    <form action="userResult.jsp" method="post">
+    <form action="rootResult.jsp" method="get">
         Username: <input type="text" name="username"> <br>
-        Password: <input type="password" name="password" /> <input type="submit"
-            value="Submit" />
+        Password: <input type="password" name="password"> <input type="submit"
+            value="Submit">
     </form>
+
+</body>
+</html>

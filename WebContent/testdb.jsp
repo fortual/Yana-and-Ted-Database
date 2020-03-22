@@ -9,7 +9,7 @@
     <TITLE>Navigating in a Database Table </TITLE>
 </HEAD>
 
-<BODY bgcolor="#ffffcc">
+<BODY>
   <font size="+3" color="green"><br>Welcome in www.roseindia.net !</font>
   <FORM action="testdb.jsp" method="get">
     <TABLE style="background-color: #ECE5B6;" WIDTH="30%" >

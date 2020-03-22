@@ -40,7 +40,7 @@ int i=ps.executeUpdate();
 if(i>0)  
 out.print("You are successfully registered...");            
 }
-catch(Exception e2)
+catch(Exception e2) {
 System.out.println(e2);
 }  
           

@@ -2,3 +2,13 @@
 /RegistrationServlet.class
 /user.class
 /userDAO.class
+/.classpath
+/.gitignore
+/.project
+/ConnectionManager.class
+/UserBean.class
+/UserDAO.class
+/com/
+/init.sql
+/makeroot.sql
+/mysql-connector-java-5.1.32-bin.jar
