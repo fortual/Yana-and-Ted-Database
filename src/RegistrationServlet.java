@@ -9,8 +9,7 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-public void doPost(HttpServletRequest request, HttpServletResponse response)  
-            throws ServletException, IOException {  
+public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
   
 response.setContentType("text/html");  
 PrintWriter out = response.getWriter();  
@@ -22,7 +21,7 @@ String p=request.getParameter("password");
 String g=request.getParameter("gender");  
 String a=request.getParameter("age");  
 
-{  
+  
 Class.forName("oracle.jdbc.driver.OracleDriver");  
 Connection con=DriverManager.getConnection(  
 "jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
@@ -41,7 +40,9 @@ int i=ps.executeUpdate();
 if(i>0)  
 out.print("You are successfully registered...");            
 }
-catch (Exception e2) {System.out.println(e2);}  
+catch(Exception e2)
+System.out.println(e2);
+}  
           
 out.close();  
 }  
