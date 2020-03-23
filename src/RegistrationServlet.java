@@ -24,13 +24,13 @@ try
 
      UserBean user = new UserBean();
      String email = request.getParameter("email");
+     String gender = request.getParameter("gender");
+     int age = Integer.parseInt(request.getParameter("age"));
      user.setEmail(email.toLowerCase());
      user.setPassword(request.getParameter("password"));
      user.setFirstName(request.getParameter("firstname"));
      user.setLastName(request.getParameter("lastname"));
-     String gender = request.getParameter("gender");
      user.setGender(gender.charAt(0));
-     int age = Integer.parseInt(request.getParameter("age"));
      user.setAge(age);
 
      user = UserDAO.registration(user);
