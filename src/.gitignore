@@ -2,3 +2,6 @@
 /RegistrationServlet.class
 /user.class
 /userDAO.class
+/ConnectionManager.class
+/UserBean.class
+/UserDAO.class

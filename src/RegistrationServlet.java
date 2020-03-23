@@ -1,50 +1,56 @@
-import java.io.*;  
-import java.sql.*;  
-import javax.servlet.ServletException;  
-import javax.servlet.http.*;  
-  
-public class RegistrationServlet extends HttpServlet {  
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 /**
-	 * 
-	 */
+ * Servlet implementation class RegistrationServlet
+ */
+
+
+
+@WebServlet("/RegistrationServlet") // This is the URL of the servlet.
+public class RegistrationServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
-  
-response.setContentType("text/html");  
-PrintWriter out = response.getWriter();  
-          
-String f=request.getParameter("first_name");  
-String l=request.getParameter("last_name");  
-String u=request.getParameter("username");  
-String p=request.getParameter("password");  
-String g=request.getParameter("gender");  
-String a=request.getParameter("age");  
+public void doGet(HttpServletRequest request, HttpServletResponse response) 
+			           throws ServletException, java.io.IOException {
 
-  
-Class.forName("oracle.jdbc.driver.OracleDriver");  
-Connection con=DriverManager.getConnection(  
-"jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
-  
-PreparedStatement ps=con.prepareStatement(  
-"insert into registeruser values(?,?,?,?,?,?)");  
-  
-ps.setString(1,f);  
-ps.setString(2,l);  
-ps.setString(3,u);  
-ps.setString(4,p);  
-ps.setString(5,g);  
-ps.setString(6,a);  
-          
-int i=ps.executeUpdate();  
-if(i>0)  
-out.print("You are successfully registered...");            
+try
+{	    
+
+     UserBean user = new UserBean();
+     String email = request.getParameter("email");
+     user.setEmail(email.toLowerCase());
+     user.setPassword(request.getParameter("password"));
+     user.setFirstName(request.getParameter("firstname"));
+     user.setLastName(request.getParameter("lastname"));
+     String gender = request.getParameter("gender");
+     user.setGender(gender.charAt(0));
+     int age = Integer.parseInt(request.getParameter("age"));
+     user.setAge(age);
+
+     user = UserDAO.registration(user);
+	   		    
+     if (user.isValid())
+     {
+	        
+          HttpSession session = request.getSession(true);	    
+          session.setAttribute("currentSessionUser",user); 
+          response.sendRedirect("mainPage.jsp"); //logged-in page      		
+     }
+	        
+     else 
+          response.sendRedirect("invalidRegistration.jsp"); //error page 
+} 
+		
+		
+catch (Throwable theException) 	    
+{
+     System.out.println(theException); 
 }
-catch(Exception e2) {
-System.out.println(e2);
-}  
-          
-out.close();  
-}  
-  
-}  
+       }
+	}

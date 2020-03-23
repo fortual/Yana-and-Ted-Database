@@ -23,7 +23,8 @@ try
 {	    
 
      UserBean user = new UserBean();
-     user.setEmail(request.getParameter("email"));
+     String email = request.getParameter("email");
+     user.setEmail(email.toLowerCase());
      user.setPassword(request.getParameter("password"));
 
      user = UserDAO.login(user);
@@ -33,7 +34,8 @@ try
 	        
           HttpSession session = request.getSession(true);	    
           session.setAttribute("currentSessionUser",user); 
-          response.sendRedirect("mainPage.jsp"); //logged-in page      		
+          if(user.getEmail()=="root") {response.sendRedirect("RootControl.jsp");}
+          else {response.sendRedirect("mainPage.jsp");} //logged-in page      		
      }
 	        
      else 

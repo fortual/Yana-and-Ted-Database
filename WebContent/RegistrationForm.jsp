@@ -8,19 +8,19 @@
 </head>
 <body>
 <h1>Registration Form</h1>
-<form action="registrationResult.jsp" method="post">
+<form action="RegistrationServlet">
 			<table style="with: 50%">
 				<tr>
+					<td>UserName (Email)</td>
+					<td><input type="text" name="email" /></td>
+				</tr>
+				<tr>
 					<td>First Name</td>
-					<td><input type="text" name="first_name" /></td>
+					<td><input type="text" name="firstname" /></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" name="last_name" /></td>
-				</tr>
-				<tr>
-					<td>UserName (Email)</td>
-					<td><input type="text" name="username" /></td>
+					<td><input type="text" name="lastname" /></td>
 				</tr>
 				<tr>
 					<td>Password</td>

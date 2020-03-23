@@ -13,7 +13,7 @@ public class ConnectionManager {
 			String url = "jdbc:mysql://localhost:3306/" + "ytcomedy";
 			// assuming "DataSource" is your DataSource name
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 
 			try {
 				con = DriverManager.getConnection(url, "john", "pass1234");

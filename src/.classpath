@@ -7,7 +7,7 @@
 			<attribute name="javadoc_location" value="https://javaee.github.io/javaee-spec/javadocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tjsas/Documents/GitHub/Yana-and-Ted-Database/bin/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.32-bin.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

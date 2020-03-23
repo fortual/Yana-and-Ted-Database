@@ -5,6 +5,7 @@ public class UserBean {
 	private String firstName;
 	private String lastName;
 	private char gender;
+	private int age;
 	public boolean valid;
 
 	public String getEmail() {
@@ -39,12 +40,20 @@ public class UserBean {
 		lastName = newLastName;
 	}
 	
-	public char gender() {
+	public char getGender() {
 		return gender;
 	}
 
 	public void setGender(char newGender) {
 		gender = newGender;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setAge(int newAge) {
+		age = newAge;
 	}
 
 	public boolean isValid() {
