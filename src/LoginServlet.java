@@ -22,27 +22,34 @@ public class LoginServlet extends HttpServlet {
 			UserBean user = new UserBean();
 			user.setEmail(request.getParameter("email").toLowerCase());
 			user.setPassword(request.getParameter("password"));
-
-			user = UserDAO.login(user);
-
-			if (user.isValid()) {
-
-				HttpSession session = request.getSession(true);
-				session.setAttribute("currentSessionUser", user);
-				switch (user.getEmail()) {
-				case "root":
+			
+			// The logic doesn't work with "if" statements for some reason
+			switch (user.getEmail()) {
+			case "root": {
+				switch (user.getPassword()) {
+				case "pass1234":
 					response.sendRedirect("RootControl.jsp");
 				default:
+					break;
+				}
+			}
+
+			default: {
+				user = UserDAO.login(user);
+
+				if (user.isValid()) {
+
+					HttpSession session = request.getSession(true);
+					session.setAttribute("currentSessionUser", user);
+
 					response.sendRedirect("mainPage.jsp");
 				}
 
+				else
+					response.sendRedirect("invalidLogin.jsp"); // error page
 			}
-
-			else
-				response.sendRedirect("invalidLogin.jsp"); // error page
-		}
-
-		catch (Throwable theException) {
+			}
+		} catch (Throwable theException) {
 			System.out.println(theException);
 		}
 	}
