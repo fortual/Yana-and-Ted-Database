@@ -82,9 +82,7 @@ public class UserDAO {
 		return bean;
 
 	}
-	
-	
-	
+
 	public static UserBean registration(UserBean bean) {
 
 		// preparing some objects for connection
@@ -109,8 +107,8 @@ public class UserDAO {
 			currentCon = ConnectionManager.getConnection();
 			stmt = currentCon.createStatement();
 			rs = stmt.executeQuery(searchQuery);
-			boolean more = rs.next();
-
+			boolean more = rs.next();			
+			
 			// if user does not exist set the isValid variable to false
 			if (!more) {
 				System.out.println("Registration complete.");

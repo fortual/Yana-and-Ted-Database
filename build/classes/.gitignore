@@ -5,3 +5,5 @@
 /ConnectionManager.class
 /UserBean.class
 /UserDAO.class
+/UserDAO$UserException.class
+/UserException.class
