@@ -9,43 +9,41 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class LoginServlet
  */
 
-
-
 @WebServlet("/LoginServlet") // This is the URL of the servlet.
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-public void doGet(HttpServletRequest request, HttpServletResponse response) 
-			           throws ServletException, java.io.IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 
-try
-{	    
+		try {
 
-     UserBean user = new UserBean();
-     String email = request.getParameter("email");
-     user.setEmail(email.toLowerCase());
-     user.setPassword(request.getParameter("password"));
+			UserBean user = new UserBean();
+			user.setEmail(request.getParameter("email").toLowerCase());
+			user.setPassword(request.getParameter("password"));
 
-     user = UserDAO.login(user);
-	   		    
-     if (user.isValid())
-     {
-	        
-          HttpSession session = request.getSession(true);	    
-          session.setAttribute("currentSessionUser",user); 
-          if(user.getEmail()=="root") {response.sendRedirect("RootControl.jsp");}
-          else {response.sendRedirect("mainPage.jsp");} //logged-in page      		
-     }
-	        
-     else 
-          response.sendRedirect("invalidLogin.jsp"); //error page 
-} 
-		
-		
-catch (Throwable theException) 	    
-{
-     System.out.println(theException); 
-}
-       }
+			user = UserDAO.login(user);
+
+			if (user.isValid()) {
+
+				HttpSession session = request.getSession(true);
+				session.setAttribute("currentSessionUser", user);
+				switch (user.getEmail()) {
+				case "root":
+					response.sendRedirect("RootControl.jsp");
+				default:
+					response.sendRedirect("mainPage.jsp");
+				}
+
+			}
+
+			else
+				response.sendRedirect("invalidLogin.jsp"); // error page
+		}
+
+		catch (Throwable theException) {
+			System.out.println(theException);
+		}
 	}
+}

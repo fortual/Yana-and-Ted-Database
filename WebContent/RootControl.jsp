@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<h1>Welcome, Root!</h1><br>
+Click the Submit button to initialize the database.<br>
 	<form action="InitServlet">
 
 		<input type="submit" value="submit">
