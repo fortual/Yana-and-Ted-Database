@@ -11,27 +11,27 @@
 			<table style="with: 50%">
 				<tr>
 					<td>Username (Email)</td>
-					<td><input type="text" name="email" /></td>
+					<td><input type="text" name="email" maxlength="50" required/></td>
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="password" name="password" /></td>
+					<td><input type="password" name="password" maxlength="50" required/></td>
 				</tr>
 				<tr>
 					<td>First Name</td>
-					<td><input type="text" name="firstname" /></td>
+					<td><input type="text" name="firstname" maxlength="50" required/></td>
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" name="lastname" /></td>
+					<td><input type="text" name="lastname" maxlength="50" required/></td>
 				</tr>
 				<tr>
 					<td>Gender</td>
-					<td><input type="text" name="gender" /></td>
+					<td><input type="text" name="gender" maxlength="1" required/></td>
 				</tr>
 				<tr>
 					<td>Age</td>
-					<td><input type="text" name="age" /></td>
+					<td><input type="text" name="age" maxlength="2" required/></td>
 				</tr></table>
 			<input type="submit" value="Submit" /></form>
 </body>

@@ -16,11 +16,11 @@
 		<table style="with: 50%">
 			<tr>
 				<td>Username (Email)</td>
-				<td><input type="text" name="email" /></td>
+				<td><input type="text" name="email" maxlength="50" required/></td>
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" name="password" /></td>
+				<td><input type="password" name="password" maxlength="50" required/></td>
 			</tr>
 		</table>
 		<input type="submit" value="Submit" />
