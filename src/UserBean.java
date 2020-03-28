@@ -8,6 +8,10 @@ public class UserBean {
 	private int age;
 	public boolean valid;
 
+	public UserBean() {
+		
+	}
+	
 	public String getEmail() {
 		return email;
 	}
