@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
 				switch (user.getPassword()) {
 				case "pass1234":
 					response.sendRedirect("RootControl.jsp");
+					break;
 				default:
 					break;
 				}
@@ -47,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 
 				else
 					response.sendRedirect("invalidLogin.jsp"); // error page
+				break;
 			}
 			}
 		} catch (Throwable theException) {
