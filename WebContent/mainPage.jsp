@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Welcome to Comedy Tube</h1>
+<h2><a href="PostVideo.jsp">Post Video</a></h2>
 
 </body>
 </html>
