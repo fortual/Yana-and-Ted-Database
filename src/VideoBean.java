@@ -7,6 +7,7 @@ public class VideoBean {
 	private int comid;
 	private String postuser;
 	private Date postdate;
+	public boolean valid = false;
 
 	public VideoBean() {}
 	
@@ -30,7 +31,7 @@ public class VideoBean {
 		return descrip;
 	}
 	
-	public int getcomid() {
+	public int getComid() {
 		return comid;
 	}
 	
@@ -55,7 +56,7 @@ public class VideoBean {
 		descrip = newDescrip;
 	}
 
-	public void setUrl(int newid) {
+	public void setComid(int newid) {
 		comid = newid;
 	}
 
@@ -68,6 +69,12 @@ public class VideoBean {
 	}
 
 	
-	
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean newValid) {
+		valid = newValid;
+	}
 	
 }

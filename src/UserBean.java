@@ -6,9 +6,19 @@ public class UserBean {
 	private String lastName;
 	private char gender;
 	private int age;
-	public boolean valid;
+	public boolean valid = false;
 
 	public UserBean() {
+		
+	}
+	
+	public UserBean(String newEmail, String newPass, String newNameF, String newNameL, char newGender, int newAge) {
+		email = newEmail;
+		password = newPass;
+		firstName = newNameF;
+		lastName = newNameL;
+		gender = newGender;
+		age = newAge;
 		
 	}
 	
