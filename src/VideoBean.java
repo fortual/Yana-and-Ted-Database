@@ -76,5 +76,5 @@ public class VideoBean {
 	public void setValid(boolean newValid) {
 		valid = newValid;
 	}
-	
+
 }

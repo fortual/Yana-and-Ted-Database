@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Video Upload</h1>
-<form action="uploadResult.jsp" method="post">
+<form action="PostServlet">
 			<table style="with: 50%">
 				<tr>
 					<td>Enter Video Embed Code (Must be YouTube)</td>
@@ -18,15 +18,15 @@
 				</tr>
 				<tr>
 					<td>Enter Video Title</td>
-					<td><input type="text" name="videoTitle" /></td>
+					<td><input type="text" name="title" /></td>
 				</tr>
 				<tr>
 					<td>Enter Video Description</td>
-					<td><input type="text" name="videoDescription" /></td>
+					<td><input type="text" name="descrip" /></td>
 				</tr>
 				<tr>
-					<td>Enter Video Tags</td>
-					<td><input type="text" name="tags" /></td>
+					<td>Enter Comedian ID</td>
+					<td><input type="text" name="comid" /></td>
 				</tr>
 				</table>
 			<input type="submit" value="Submit" /></form>
