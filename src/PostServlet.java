@@ -24,23 +24,20 @@ public class PostServlet extends HttpServlet {
 			video.setTitle(request.getParameter("title"));
 			video.setDescrip(request.getParameter("descrip"));
 			video.setComid(Integer.parseInt(request.getParameter("comid")));
-			UserBean postuser = (UserBean) request.getAttribute("currentSessionUser");
+			UserBean postuser = (UserBean) request.getSession().getAttribute("currentSessionUser");
 			video.setUser(postuser.getEmail());
-
-			// The logic doesn't work with "if" statements for some reason
 
 			video = VideoDAO.post(video);
 
 			if (video.isValid()) {
-
 				response.sendRedirect("PostResult.jsp");
 			}
 
 			else
 				response.sendRedirect("invalidLogin.jsp"); // error page
 
-		} catch (Throwable theException) {
-			System.out.println(theException);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 }

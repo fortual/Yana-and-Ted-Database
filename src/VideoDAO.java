@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Date;
 
 public class VideoDAO {
 	static Connection currentCon = null;
@@ -31,6 +32,7 @@ public class VideoDAO {
 				String descrip = bean.getDescrip();
 				int comid = bean.getComid();
 				String postuser = bean.getPostUser();
+				java.sql.Date date = new java.sql.Date();
 
 				String insertQuery = "INSERT INTO `ytcomedy`.`youtubevideos` VALUES ('" + url + "', '" + title + "', '"
 						+ descrip + "', '" + comid + "', '" + postuser + "', '" + "CURDATE()');";
@@ -46,7 +48,7 @@ public class VideoDAO {
 				rs.close();
 			}
 
-			// if user exists set the isValid variable to true
+			// if video exists set the isValid variable to false
 			else if (more) {
 				System.out.println("ERROR: A video of that URL already exists.");
 				bean.setValid(false);
