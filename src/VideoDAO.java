@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Date;
+import java.util.Calendar;
 
 public class VideoDAO {
 	static Connection currentCon = null;
@@ -32,10 +32,10 @@ public class VideoDAO {
 				String descrip = bean.getDescrip();
 				int comid = bean.getComid();
 				String postuser = bean.getPostUser();
-				java.sql.Date date = new java.sql.Date();
+				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
 				String insertQuery = "INSERT INTO `ytcomedy`.`youtubevideos` VALUES ('" + url + "', '" + title + "', '"
-						+ descrip + "', '" + comid + "', '" + postuser + "', '" + "CURDATE()');";
+						+ descrip + "', '" + comid + "', '" + postuser + "', '" + date + "');";
 				stmt = currentCon.createStatement();
 				stmt.executeUpdate(insertQuery);
 
