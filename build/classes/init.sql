@@ -49,3 +49,6 @@ CREATE TABLE IsFavorite(
 	PRIMARY KEY(email, comid),
 	FOREIGN KEY(email) REFERENCES Users(email),
 	FOREIGN KEY(comid) REFERENCES Comedians(comid));
+
+INSERT INTO `ytcomedy`.`users` VALUES ('test@test.com','testing','Test','Account','n','22');
+INSERT INTO `ytcomedy`.`comedians` VALUES ('1234','Bill','Funny','19920821','Pontiac');
