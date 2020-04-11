@@ -5,6 +5,7 @@ public class ComedianBean {
 	private String lastName;
 	java.sql.Date birthday;
 	private String birthplace;
+	int comid;
 	public boolean valid = false;
 
 	public ComedianBean() {
