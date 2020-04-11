@@ -8,7 +8,7 @@ CREATE TABLE Users (
 	PRIMARY KEY(email));
 
 CREATE TABLE Comedians (
-	comid INTEGER,
+	comid INTEGER NOT NULL AUTO_INCREMENT,
 	firstname VARCHAR(50),
 	lastname VARCHAR(50),
 	birthday DATE,

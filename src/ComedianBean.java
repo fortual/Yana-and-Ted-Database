@@ -1,4 +1,4 @@
-import  java.sql.Date;
+
 public class ComedianBean {
 
 	private String firstName;
