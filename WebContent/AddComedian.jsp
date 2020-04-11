@@ -10,7 +10,8 @@
   <script>
   $( function() {
 	    $( "#datepicker" ).datepicker({
-	    	  dateFormat: "yy-mm-dd"
+	    	dateFormat: "yy-mm-dd",
+	    	changeYear: true
 	    });
 	  });
   </script>

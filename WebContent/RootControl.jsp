@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<h1>Welcome, Root!</h1><br>
+<h1>Welcome, Root!</h1>
 Click the Submit button to initialize the database.<br>
 	<form action="InitServlet">
 

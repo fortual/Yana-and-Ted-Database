@@ -49,10 +49,13 @@ public class AddComedianServlet extends HttpServlet {
 			if (bean.isValid()) {
 
 				System.out.println("Comedian successfully added with ID = " + bean.getComid());
+				response.sendRedirect("RootControl.jsp"); // Root page
 			}
 
-			else
+			else {
 				System.out.println("Comedian NOT added"); // error page
+				response.sendRedirect("RootControl.jsp"); // Root page
+			}
 		}
 
 		catch (Throwable theException) {
