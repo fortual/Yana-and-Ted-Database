@@ -19,5 +19,6 @@ Click the Submit button to initialize the database.<br>
 		<input type="submit" value="submit">
 
 	</form>
+<jsp:include page="AddComedian.jsp"/>
 </body>
 </html>
