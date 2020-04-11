@@ -8,6 +8,7 @@
 <body>
 <h1>Welcome to Comedy Tube</h1>
 <h2><a href="PostForm.jsp">Post Video</a></h2>
+<h2><a href="AddComedian.jsp">Add Comedian</a></h2>
 
 </body>
 </html>
