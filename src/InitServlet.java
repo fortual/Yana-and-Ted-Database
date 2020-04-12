@@ -28,6 +28,9 @@ public class InitServlet extends HttpServlet {
 		try {
 			stmt = currentCon.createStatement();
 			
+			// Dropping tables
+			stmt.executeUpdate("DROP TABLE IF EXISTS Users, Comedians, YoutubeVideos, Reviews, YoutubeTags, IsFavorite");
+
 			// Table Creation
 			stmt.executeUpdate("CREATE TABLE Users (email VARCHAR(50),pass VARCHAR(50),firstname VARCHAR(50),lastname VARCHAR(50),gender CHAR(1),age INTEGER,PRIMARY KEY(email));");
 			stmt.executeUpdate("CREATE TABLE Comedians (comid INTEGER NOT NULL AUTO_INCREMENT,firstname VARCHAR(50),lastname VARCHAR(50),birthday DATE,birthplace VARCHAR(50),PRIMARY KEY(comid));");
@@ -60,7 +63,7 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`comedians` (`firstname`, `lastname`, `birthday`, `birthplace`) VALUES ('Bo', 'Burnham', '1990-8-21', 'Hamilton, MA');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`comedians` (`firstname`, `lastname`, `birthday`, `birthplace`) VALUES ('Jim', 'Carrey', '1962-1-17', 'Newmarket, ON');");
 
-			
+			// Default videos
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'A Car Accident Is a Real Mood Killer', 'Hannibal Buress remembers getting his hat stolen by a very confident thief and getting into a car accident on his birthday. ', '1', 'tjsase@gmail.com');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking Is a Fantasy Crime', 'Hannibal Buress talks about getting a ticket for jaywalking in Montreal and wonders at the absurdities of airport security in his special Animal Furnace. ', '1', 'tjsase@gmail.com');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters Ask Questions', '#HannibalBuress on racist porn comments, having too much pickle juice, and his problem with #LilWayne. ', '1', 'tjsase@gmail.com');");
@@ -72,7 +75,7 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'John Mulaney Monologue - SNL', 'John Mulaney does stand-up about hosting the first Saturday Night Live on Leap Year Day, having a baby boomer dad with no friends and his Make-A-Wish experience.', '6', 'tjsase@gmail.com');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'What’s New Pussycat? 21 Times on a Diner Jukebox', 'John Mulaney recalls he and a friend pranking an entire Chicago diner by playing Tom Joness What’s New Pussycat? on the jukebox 21 times in a row.', '6', 'tjsase@gmail.com');");
 			
-			
+			// Default tags
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'Accident');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters');\r\n");
@@ -84,8 +87,7 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'SNL');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'Jukebox');\r\n");
 			
-
-			
+			// Default reviews
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('funny', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=uQecHQfy8eQ');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('lol', 'e', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=xlonY2l3V9c');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('wtf', 'f', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=y3kGVty0dyg');\r\n");
@@ -97,6 +99,7 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Huh?', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=jRLH8E_CpP0');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Classic stuff', 'f', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=Mw7Gryt-rcc');\r\n");
 
+			// Default favorites
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '1');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '2');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '3');");
