@@ -10,23 +10,29 @@
 </head>
 <body>
 <h1>Video Upload</h1>
+${PostVideoMessage}
+
 <form action="PostServlet">
 			<table style="with: 50%">
 				<tr>
 					<td>Enter Video Embed Code (Must be YouTube)</td>
-					<td><input type="text" name="url" /></td>
+					<td><input type="text" name="url" required/></td>
 				</tr>
 				<tr>
 					<td>Enter Video Title</td>
-					<td><input type="text" name="title" /></td>
+					<td><input type="text" name="title" required/></td>
 				</tr>
 				<tr>
 					<td>Enter Video Description</td>
-					<td><input type="text" name="descrip" /></td>
+					<td><input type="text" name="descrip" required/></td>
 				</tr>
 				<tr>
 					<td>Enter Comedian ID</td>
-					<td><input type="text" name="comid" /></td>
+					<td><input type="text" name="comid" required/></td>
+				</tr>
+				<tr>
+					<td>Enter Tags separated by comma</td>
+					<td><input type="text" name="tags" /></td>
 				</tr>
 				</table>
 			<input type="submit" value="Submit" /></form>

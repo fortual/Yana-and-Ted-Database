@@ -16,28 +16,34 @@ public class PostServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
-
+		
+		
+		request.setAttribute("PostVideoMessage", null);
+		
+		
 		try {
 
 			VideoBean video = new VideoBean();
+			UserBean postuser = (UserBean) request.getSession().getAttribute("currentSessionUser");
+			
 			video.setUrl(request.getParameter("url").toLowerCase());
 			video.setTitle(request.getParameter("title"));
 			video.setDescrip(request.getParameter("descrip"));
 			video.setComid(Integer.parseInt(request.getParameter("comid")));
-			UserBean postuser = (UserBean) request.getSession().getAttribute("currentSessionUser");
 			video.setUser(postuser.getEmail());
+			String tags = request.getParameter("tags").toLowerCase();
+			
+			// Setting output message regarding success of post
+			request.setAttribute("PostVideoMessage", VideoDAO.post(video, tags));
 
-			video = VideoDAO.post(video);
-
-			if (video.isValid()) {
-				response.sendRedirect("PostResult.jsp");
-			}
-
-			else
-				response.sendRedirect("invalidLogin.jsp"); // error page
+			
 
 		} catch (Exception e) {
 			System.out.println(e);
+			request.setAttribute("PostVideoMessage", e);
 		}
+		
+		// Returning user to Post page with message
+		request.getRequestDispatcher("PostForm.jsp").forward(request, response);
 	}
 }
