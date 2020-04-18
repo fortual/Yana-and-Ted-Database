@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Video Upload</title>
+<title>ComedyTube Post Form</title>
 </head>
 <body>
 <h1>Video Upload</h1>
-${PostVideoMessage}
+${PostVideoMessage}<br>
 
 <form action="PostServlet">
 			<table style="with: 50%">
