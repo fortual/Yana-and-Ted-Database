@@ -17,22 +17,22 @@
   </script>
 </head>
 <body>
-<h1>Add Comedian</h1>
+<h2>Add Comedian</h2>
 <form action="AddComedianServlet">
 			<table style="with: 50%">
 				<tr>
-					<td>First Name</td>
+					<td>First Name:</td>
 					<td><input type="text" name="firstname" maxlength="50" required/></td>
 				</tr>
 				<tr>
-					<td>Last Name</td>
+					<td>Last Name:</td>
 					<td><input type="text" name="lastname" maxlength="50" required/></td>
 				</tr>
 				<tr>
-					<td>Birthday</td>
+					<td>Birthday:</td>
 					<td><input type="text" id="datepicker" name="birthday" required></td>
 				</tr><tr>
-					<td>Birthplace</td>
+					<td>Birthplace:</td>
 					<td><input type="text" name="birthplace" maxlength="50" required/></td>
 				</tr></table>
 			<input type="submit" value="Submit" /></form>

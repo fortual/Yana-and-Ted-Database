@@ -9,29 +9,29 @@
 <title>ComedyTube Post Form</title>
 </head>
 <body>
-<h1>Video Upload</h1>
+<h2>Video Posting</h2>
 ${PostVideoMessage}<br>
 
 <form action="PostServlet">
-			<table style="with: 50%">
+			<table style="width: 50%">
 				<tr>
-					<td>Enter Video Embed Code (Must be YouTube)</td>
+					<td>YouTube Embed URL:</td>
 					<td><input type="text" name="url" required/></td>
 				</tr>
 				<tr>
-					<td>Enter Video Title</td>
+					<td>Title:</td>
 					<td><input type="text" name="title" required/></td>
 				</tr>
 				<tr>
-					<td>Enter Video Description</td>
+					<td>Description:</td>
 					<td><input type="text" name="descrip" required/></td>
 				</tr>
 				<tr>
-					<td>Enter Comedian ID</td>
+					<td>Comedian ID:</td>
 					<td><input type="text" name="comid" required/></td>
 				</tr>
 				<tr>
-					<td>Enter Tags separated by comma</td>
+					<td>Tags (separated by comma):</td>
 					<td><input type="text" name="tags" /></td>
 				</tr>
 				</table>
