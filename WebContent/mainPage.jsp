@@ -50,7 +50,7 @@
 	</h2>
 
 	<h2>
-		<a href="listPages9.jsp">Poor Youtubes</a>
+		<a href="listPages9.jsp">Poorly Rated Videos</a>
 	</h2>
 
 	<h2>Twin Users</h2>
