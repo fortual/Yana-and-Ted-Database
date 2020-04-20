@@ -111,6 +111,13 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '9');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '10');");
 			
+			stmt.executeUpdate("CREATE USER 'usersearch'@'localhost' IDENTIFIED BY 'search';");
+			stmt.executeUpdate("GRANT SELECT ON ytcomedy.youtubevideos TO ‘usersearch’@'localhost’;");
+			stmt.executeUpdate("GRANT SELECT ON ytcomedy.comedians TO ‘usersearch’@'localhost’;");
+			stmt.executeUpdate("GRANT SELECT ON ytcomedy.isfavorite TO ‘usersearch’@'localhost’;");
+			stmt.executeUpdate("GRANT SELECT ON ytcomedy.reviews TO ‘usersearch’@'localhost’;");
+			stmt.executeUpdate("GRANT SELECT ON ytcomedy.youtubetags TO ‘usersearch’@'localhost’;");
+			
 			stmt.close();
 			currentCon.close();
 			response.sendRedirect("Index.jsp");
