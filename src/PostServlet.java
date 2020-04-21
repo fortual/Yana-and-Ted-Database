@@ -44,6 +44,6 @@ public class PostServlet extends HttpServlet {
 		}
 		
 		// Returning user to Post page with message
-		request.getRequestDispatcher("PostForm.jsp").forward(request, response);
+		request.getRequestDispatcher("mainPage.jsp").forward(request, response);
 	}
 }

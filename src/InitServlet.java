@@ -36,7 +36,7 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("CREATE TABLE Comedians (comid INTEGER NOT NULL AUTO_INCREMENT,firstname VARCHAR(50),lastname VARCHAR(50),birthday DATE,birthplace VARCHAR(50),PRIMARY KEY(comid));");
 			stmt.executeUpdate("CREATE TABLE YoutubeVideos (url VARCHAR(150),title VARCHAR(50),descrip VARCHAR(200),comid INTEGER NOT NULL,postuser VARCHAR(50) NOT NULL,postdate DATE,PRIMARY KEY(url),FOREIGN KEY(comid) REFERENCES Comedians(comid),FOREIGN KEY(postuser) REFERENCES Users(email));");
 			stmt.executeUpdate("CREATE TABLE Reviews (reviewid INTEGER NOT NULL AUTO_INCREMENT,remark VARCHAR(100),rating CHAR(1),author VARCHAR(50) NOT NULL,youtubeid VARCHAR(150) NOT NULL,PRIMARY KEY(reviewid),FOREIGN KEY(author) REFERENCES Users(email),FOREIGN KEY(youtubeid) REFERENCES YoutubeVideos(url),CONSTRAINT ratingck CHECK (rating='P' OR rating='F' OR rating='G' OR rating='E'));");
-			stmt.executeUpdate("CREATE TABLE YoutubeTags(url VARCHAR(150),tag VARCHAR(50),PRIMARY KEY(url, tag));");
+			stmt.executeUpdate("CREATE TABLE `youtubetags` (`url` varchar(150) NOT NULL,`tag` varchar(50) NOT NULL,`email` VARCHAR(50),PRIMARY KEY (`url`,`tag`));");
 			stmt.executeUpdate("CREATE TABLE IsFavorite(email VARCHAR(50),comid INTEGER,PRIMARY KEY(email, comid),FOREIGN KEY(email) REFERENCES Users(email),FOREIGN KEY(comid) REFERENCES Comedians(comid));");
 			
 			// Default Users
@@ -62,30 +62,32 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`comedians` (`firstname`, `lastname`, `birthday`, `birthplace`) VALUES ('John', 'Oliver', '1977-4-27', 'Erdington, Birmingham, England');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`comedians` (`firstname`, `lastname`, `birthday`, `birthplace`) VALUES ('Bo', 'Burnham', '1990-8-21', 'Hamilton, MA');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`comedians` (`firstname`, `lastname`, `birthday`, `birthplace`) VALUES ('Jim', 'Carrey', '1962-1-17', 'Newmarket, ON');");
-
+			
 			// Default videos
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'A Car Accident Is a Real Mood Killer', 'Hannibal Buress remembers getting his hat stolen by a very confident thief and getting into a car accident on his birthday. ', '1', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking Is a Fantasy Crime', 'Hannibal Buress talks about getting a ticket for jaywalking in Montreal and wonders at the absurdities of airport security in his special Animal Furnace. ', '1', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters Ask Questions', '#HannibalBuress on racist porn comments, having too much pickle juice, and his problem with #LilWayne. ', '1', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Your Prayers Mean Nothing', '#HannibalBuress on how much he hates his teenage cousin, not putting a napkin on his lap at restaurants, and why he doesnt want your prayers. ', '1', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Live From Amsterdam | Dead Parrot', 'Full Performance from Hannibal Buress. ', '1', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling Plans Is Like Heroin', 'getting his hat stolen by a very confident thief and getting into a car accident on his birthday. ', '6', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Accidentally Got a Prostate Exam', 'As someone who’s always anxious, John Mulaney once tried to get a Xanax prescription from his doctor, only for his plan to go horribly awry. ', '6', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'Ice-T on SVU & Old Murder Investigations', 'John Mulaney isnt sure why Ice-T is always shocked in every episode of Law & Order: SVU after 11 years of working in the sex crimes department. ', '6', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'John Mulaney Monologue - SNL', 'John Mulaney does stand-up about hosting the first Saturday Night Live on Leap Year Day, having a baby boomer dad with no friends and his Make-A-Wish experience.', '6', 'tjsase@gmail.com');");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'What’s New Pussycat? 21 Times on a Diner Jukebox', 'John Mulaney recalls he and a friend pranking an entire Chicago diner by playing Tom Joness What’s New Pussycat? on the jukebox 21 times in a row.', '6', 'tjsase@gmail.com');");
+			// Today's date
+			java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'A Car Accident Is a Real Mood Killer', 'Hannibal Buress remembers getting his hat stolen by a very confident thief and getting into a car accident on his birthday. ', '1', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking Is a Fantasy Crime', 'Hannibal Buress talks about getting a ticket for jaywalking in Montreal and wonders at the absurdities of airport security in his special Animal Furnace. ', '1', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters Ask Questions', '#HannibalBuress on racist porn comments, having too much pickle juice, and his problem with #LilWayne. ', '1', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Your Prayers Mean Nothing', '#HannibalBuress on how much he hates his teenage cousin, not putting a napkin on his lap at restaurants, and why he doesnt want your prayers. ', '1', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Live From Amsterdam | Dead Parrot', 'Full Performance from Hannibal Buress. ', '1', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling Plans Is Like Heroin', 'getting his hat stolen by a very confident thief and getting into a car accident on his birthday. ', '6', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Accidentally Got a Prostate Exam', 'As someone who’s always anxious, John Mulaney once tried to get a Xanax prescription from his doctor, only for his plan to go horribly awry. ', '6', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'Ice-T on SVU & Old Murder Investigations', 'John Mulaney isnt sure why Ice-T is always shocked in every episode of Law & Order: SVU after 11 years of working in the sex crimes department. ', '6', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'John Mulaney Monologue - SNL', 'John Mulaney does stand-up about hosting the first Saturday Night Live on Leap Year Day, having a baby boomer dad with no friends and his Make-A-Wish experience.', '6', 'tjsase@gmail.com', '" + date + "');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'What’s New Pussycat? 21 Times on a Diner Jukebox', 'John Mulaney recalls he and a friend pranking an entire Chicago diner by playing Tom Joness What’s New Pussycat? on the jukebox 21 times in a row.', '6', 'tjsase@gmail.com', '" + date + "');");
 			
 			// Default tags
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'Accident');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Prayers');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Amsterdam');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Prostate');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'SVU');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'SNL');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'Jukebox');\r\n");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'Accident';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Prayers';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Amsterdam';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Prostate';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'SVU';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'SNL';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'Jukebox';");
 			
 			// Default reviews
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('funny', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=uQecHQfy8eQ');\r\n");
@@ -111,12 +113,11 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '9');");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`isfavorite` (`email`, `comid`) VALUES ('tjsase@gmail.com', '10');");
 			
-			stmt.executeUpdate("CREATE USER 'usersearch'@'localhost' IDENTIFIED BY 'search';");
-			stmt.executeUpdate("GRANT SELECT ON ytcomedy.youtubevideos TO ‘usersearch’@'localhost’;");
-			stmt.executeUpdate("GRANT SELECT ON ytcomedy.comedians TO ‘usersearch’@'localhost’;");
-			stmt.executeUpdate("GRANT SELECT ON ytcomedy.isfavorite TO ‘usersearch’@'localhost’;");
-			stmt.executeUpdate("GRANT SELECT ON ytcomedy.reviews TO ‘usersearch’@'localhost’;");
-			stmt.executeUpdate("GRANT SELECT ON ytcomedy.youtubetags TO ‘usersearch’@'localhost’;");
+			stmt.executeUpdate("GRANT SELECT ON `ytcomedy`.`youtubevideos` TO 'usersearch'@'localhost';");
+			stmt.executeUpdate("GRANT SELECT ON `ytcomedy`.`comedians` TO 'usersearch'@'localhost';");
+			stmt.executeUpdate("GRANT SELECT ON `ytcomedy`.`isfavorite` TO 'usersearch'@'localhost';");
+			stmt.executeUpdate("GRANT SELECT ON `ytcomedy`.`reviews` TO 'usersearch'@'localhost';");
+			stmt.executeUpdate("GRANT SELECT ON `ytcomedy`.`youtubetags` TO 'usersearch'@'localhost';");
 			
 			stmt.close();
 			currentCon.close();

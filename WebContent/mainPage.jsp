@@ -6,66 +6,40 @@
 <title>ComedyTube Main Page</title>
 </head>
 <body>
-	<h1>Welcome to Comedy Tube</h1>
+	<h1>Welcome to Comedy Tube!</h1><br>
+	<a href= "search.jsp">Search for Videos and Comedians</a><br>
 	<table style="width: 100%">
-			<td><jsp:include page="PostForm.jsp" /></td>
-			<td><jsp:include page="AddComedian.jsp" /></td>
+		<td><jsp:include page="PostForm.jsp" /></td>
+		<td><jsp:include page="AddComedian.jsp" /></td>
 	</table>
-	<table style="width: 100%; height: 800px">
+	<br>
+	<table style="width: 100%; height: 400px">
 		<td><jsp:include page="ListCool.jsp" /></td>
 		<td><jsp:include page="ListNew.jsp" /></td>
 	</table>
-	<table style="width: 100%; height: 800px">
+	<br>
+	<table style="width: 100%; height: 400px">
 		<td><jsp:include page="ListHot.jsp" /></td>
 		<td><jsp:include page="ListTop.jsp" /></td>
 	</table>
 	<br>
-	<table style="width: 600px; height: 800px">
-		<td><jsp:include page="ListTop.jsp" /></td>
+
+	<table style="width: 100%; height: 400px">
+		<td><jsp:include page="ListComCom.jsp" /></td>
+		<td><jsp:include page="ListTwin.jsp" /></td>
 	</table>
-
+	
+	<jsp:include page="ListFavorite.jsp" />
 	<br>
+	<jsp:include page="ListTags.jsp" />
+	<br>
+	<jsp:include page="ListProdUsers.jsp" />
+	<br>
+	<jsp:include page="ListPosRev.jsp" />
+	<br>
+	<jsp:include page="ListPoor.jsp" />
 
-	<h2>Common Favorite Comedian</h2>
-	<td><select name="category">
-			<option value="-1">-Select Category-</option>
-			<option value="user 1">User 1</option>
-			<option value="user 2">User 2</option>
-	</select></td>
-	<td><select name="category">
-			<option value="-1">-Select Category-</option>
-			<option value="user 3">User 3</option>
-			<option value="user 4">User 4</option>
-	</select></td>
-	<form action="listPages6.jsp" method="post">
-		<input type="submit" value="continue" />
-	</form>
 
-	<h2>
-		<a href="listPages7.jsp">Most Productive Users</a>
-	</h2>
 
-	<h2>
-		<a href="listPages8.jsp">Positive Reviewers</a>
-	</h2>
-
-	<h2>
-		<a href="listPages9.jsp">Poorly Rated Videos</a>
-	</h2>
-
-	<h2>Twin Users</h2>
-	<td><select name="category">
-			<option value="-1">-Select Category-</option>
-			<option value="user 1">User 1</option>
-			<option value="user 2">User 2</option>
-	</select></td>
-	<td><select name="category">
-			<option value="-1">-Select Category-</option>
-			<option value="user 3">User 3</option>
-			<option value="user 4">User 4</option>
-	</select></td>
-	<form action="listPages10.jsp" method="post">
-		<input type="submit" value="continue" />
-	</form>
 </body>
 </html>

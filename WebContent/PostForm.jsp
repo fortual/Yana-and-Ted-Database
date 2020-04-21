@@ -12,6 +12,38 @@
 <h2>Video Posting</h2>
 ${PostVideoMessage}<br>
 
+
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+	String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "ytcomedy";
+String userid = "john";
+String password = "pass1234";
+try {
+	Class.forName(driver);
+} catch (ClassNotFoundException e) {
+	e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+
+
+		try {
+		connection = DriverManager.getConnection(connectionUrl + database, userid, password);
+		statement = connection.createStatement();
+		String sql = "select * from comedians";
+		resultSet = statement.executeQuery(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	%>
+
+
 <form action="PostServlet">
 			<table style="width: 50%">
 				<tr>
@@ -27,8 +59,19 @@ ${PostVideoMessage}<br>
 					<td><input type="text" name="descrip" required/></td>
 				</tr>
 				<tr>
-					<td>Comedian ID:</td>
-					<td><input type="text" name="comid" required/></td>
+					<td>Comedian:</td>
+					<td><select name="comid">
+		<%
+			while (resultSet.next()) {
+		%>
+
+		<option value="<%=resultSet.getString("comid")%>"><%=resultSet.getString("firstname")%> <%=resultSet.getString("lastname")%></option>
+
+		<%
+			}
+		%>
+	</select>
+	</td>
 				</tr>
 				<tr>
 					<td>Tags (separated by comma):</td>

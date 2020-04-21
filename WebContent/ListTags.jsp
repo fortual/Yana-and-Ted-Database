@@ -1,22 +1,53 @@
+<!-- This is the search result page -->
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 <html>
 <head>
 <title>Popular Tags</title>
 </head>
+	<%@page import="java.sql.DriverManager"%>
+	<%@page import="java.sql.ResultSet"%>
+	<%@page import="java.sql.Statement"%>
+	<%@page import="java.sql.Connection"%>
+	<%
+		String driver = "com.mysql.jdbc.Driver";
+		String connectionUrl = "jdbc:mysql://localhost:3306/";
+		String database = "ytcomedy";
+		String userid = "john";
+		String password = "pass1234";
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+	%>
 <body>
-<h1>Popular Tags</h1>
-      <table>
-         <tr>
-            <td>Tag 1</td>
-         </tr>
-         <tr>
-            <td>Tag 2</td>
-         </tr>
-         <tr>
-            <td>Tag 3</td>
-         </tr>
-      </table>
+	<h1>Popular Tags</h1>
+	<table>
+	<%
+		try {
+		connection = DriverManager.getConnection(connectionUrl + database, userid, password);
+		statement = connection.createStatement();
+		String sql = "select *, count(tag) from youtubetags order by count(tag) limit 10";
+		resultSet = statement.executeQuery(sql);
+		while (resultSet.next()) {
+			%>
+			
+			<tr>
+				<td><h2><%=resultSet.getString("tag")%></h2></td>
+			</tr>
+			<%
+		}
+	connection.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	%>
+	</table>
 </body>
 </html>
