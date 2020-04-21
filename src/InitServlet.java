@@ -29,14 +29,14 @@ public class InitServlet extends HttpServlet {
 			stmt = currentCon.createStatement();
 			
 			// Dropping tables
-			stmt.executeUpdate("DROP TABLE IF EXISTS Users, Comedians, YoutubeVideos, Reviews, YoutubeTags, IsFavorite");
+			stmt.executeUpdate("DROP TABLE IF EXISTS users, comedians, youtubevideos, reviews, youtubetags, isfavorite");
 
 			// Table Creation
 			stmt.executeUpdate("CREATE TABLE Users (email VARCHAR(50),pass VARCHAR(50),firstname VARCHAR(50),lastname VARCHAR(50),gender CHAR(1),age INTEGER,PRIMARY KEY(email));");
 			stmt.executeUpdate("CREATE TABLE Comedians (comid INTEGER NOT NULL AUTO_INCREMENT,firstname VARCHAR(50),lastname VARCHAR(50),birthday DATE,birthplace VARCHAR(50),PRIMARY KEY(comid));");
 			stmt.executeUpdate("CREATE TABLE YoutubeVideos (url VARCHAR(150),title VARCHAR(50),descrip VARCHAR(200),comid INTEGER NOT NULL,postuser VARCHAR(50) NOT NULL,postdate DATE,PRIMARY KEY(url),FOREIGN KEY(comid) REFERENCES Comedians(comid),FOREIGN KEY(postuser) REFERENCES Users(email));");
 			stmt.executeUpdate("CREATE TABLE Reviews (reviewid INTEGER NOT NULL AUTO_INCREMENT,remark VARCHAR(100),rating CHAR(1),author VARCHAR(50) NOT NULL,youtubeid VARCHAR(150) NOT NULL,PRIMARY KEY(reviewid),FOREIGN KEY(author) REFERENCES Users(email),FOREIGN KEY(youtubeid) REFERENCES YoutubeVideos(url),CONSTRAINT ratingck CHECK (rating='P' OR rating='F' OR rating='G' OR rating='E'));");
-			stmt.executeUpdate("CREATE TABLE `youtubetags` (`url` varchar(150) NOT NULL,`tag` varchar(50) NOT NULL,`email` VARCHAR(50),PRIMARY KEY (`url`,`tag`));");
+			stmt.executeUpdate("CREATE TABLE youtubetags (`url` varchar(150) NOT NULL,`tag` varchar(50) NOT NULL,PRIMARY KEY (`url`,`tag`));");
 			stmt.executeUpdate("CREATE TABLE IsFavorite(email VARCHAR(50),comid INTEGER,PRIMARY KEY(email, comid),FOREIGN KEY(email) REFERENCES Users(email),FOREIGN KEY(comid) REFERENCES Comedians(comid));");
 			
 			// Default Users
@@ -78,16 +78,16 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubevideos` (`url`, `title`, `descrip`, `comid`, `postuser`, `postdate`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'What’s New Pussycat? 21 Times on a Diner Jukebox', 'John Mulaney recalls he and a friend pranking an entire Chicago diner by playing Tom Joness What’s New Pussycat? on the jukebox 21 times in a row.', '6', 'tjsase@gmail.com', '" + date + "');");
 			
 			// Default tags
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'Accident';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Prayers';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Amsterdam';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Prostate';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'SVU';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'SNL';");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'Jukebox';");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=uQecHQfy8eQ', 'Accident');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=xlonY2l3V9c', 'Jaywalking');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=y3kGVty0dyg', 'Gangsters');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=hHUNPS0BzYc', 'Prayers');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=K8y-BA_gisw', 'Amsterdam');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=quZU_hA4Pr4', 'Canceling');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=BNlyZSvsNjw', 'Prostate');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=F1sd4CRcaE0', 'SVU');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=jRLH8E_CpP0', 'SNL');");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`youtubetags` (`url`, `tag`) VALUES ('https://www.youtube.com/watch?v=Mw7Gryt-rcc', 'Jukebox');");
 			
 			// Default reviews
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('funny', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=uQecHQfy8eQ');\r\n");
@@ -96,9 +96,9 @@ public class InitServlet extends HttpServlet {
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('This is great!!', 'e', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=hHUNPS0BzYc');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('haha', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=K8y-BA_gisw');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('wow', 'f', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=quZU_hA4Pr4');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('silly', 'f', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=BNlyZSvsNjw');\r\n");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('silly', 'p', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=BNlyZSvsNjw');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Heyo!', 'e', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=F1sd4CRcaE0');\r\n");
-			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Huh?', 'g', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=jRLH8E_CpP0');\r\n");
+			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Huh?', 'p', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=jRLH8E_CpP0');\r\n");
 			stmt.executeUpdate("INSERT INTO `ytcomedy`.`reviews` (`remark`, `rating`, `author`, `youtubeid`) VALUES ('Classic stuff', 'f', 'tjsase@gmail.com', 'https://www.youtube.com/watch?v=Mw7Gryt-rcc');\r\n");
 
 			// Default favorites

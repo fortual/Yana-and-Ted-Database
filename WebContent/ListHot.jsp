@@ -33,17 +33,16 @@
 		try {
 		connection = DriverManager.getConnection(connectionUrl + database, userid, password);
 		statement = connection.createStatement();
-		String sql = "SELECT *, count(*) FROM COMEDIANS WHERE EXISTS (SELECT * FROM youtubevideos WHERE comedians.comid = youtubevideos.comid AND EXISTS (SELECT * FROM reviews WHERE reviews.youtubeid = youtubevideos.url)) ORDER BY count(*)  limit 10";
+		String sql = "SELECT comid, firstname, lastname, count(comid) FROM COMEDIANS WHERE EXISTS (SELECT * FROM youtubevideos WHERE comedians.comid = youtubevideos.comid AND EXISTS (SELECT * FROM reviews WHERE reviews.youtubeid = youtubevideos.url)) ORDER BY count(comid)  limit 3";
 		resultSet = statement.executeQuery(sql);
-		int count = 0;
-		while (resultSet.next() && count < 3) {
+		while (resultSet.next()) {
 			%>
 			
 			<tr>
 				<td><h2><a href= "comedian.jsp?comid=<%=resultSet.getString("comid")%>"><%=resultSet.getString("firstname")%> <%=resultSet.getString("lastname")%></a></h2></td>
 			</tr>
 			<%
-			count++;
+			
 		}
 	connection.close();
 	} catch (Exception e) {

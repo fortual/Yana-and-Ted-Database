@@ -66,8 +66,9 @@ try {
 	%>
 
 	<h2>Add to favorites</h2>
-	<form action="favComedian.jsp" method="post">
-		<input type="submit" value="Submit" />
+	<form action="/AddFavoriteServlet">
+	 	<input type="hidden" id="thisField" name="comid" value="<%=resultSetV.getInt("comid")%>">
+		<input type="submit" name="submit" value="Submit" />
 	</form>
 	<h2>Delete from favorites</h2>
 	<form action="favComedian.jsp" method="post">

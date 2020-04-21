@@ -24,13 +24,13 @@ public class PostServlet extends HttpServlet {
 		try {
 
 			VideoBean video = new VideoBean();
-			UserBean postuser = (UserBean) request.getSession().getAttribute("currentSessionUser");
+			String postuser = (String) request.getSession().getAttribute("currentSessionUser");
 			
 			video.setUrl(request.getParameter("url").toLowerCase());
 			video.setTitle(request.getParameter("title"));
 			video.setDescrip(request.getParameter("descrip"));
 			video.setComid(Integer.parseInt(request.getParameter("comid")));
-			video.setUser(postuser.getEmail());
+			video.setUser(postuser);
 			String tags = request.getParameter("tags").toLowerCase();
 			
 			// Setting output message regarding success of post

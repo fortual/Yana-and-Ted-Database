@@ -10,14 +10,3 @@
 /InitServlet.class
 /VideoBean.class
 /VideoDAO.class
-/.classpath
-/.gitignore
-/.project
-/PostServlet.class
-/init.sql
-/makeroot.sql
-/mysql-connector-java-5.1.32-bin.jar
-/ComedianBean.class
-/ComedianDAO.class
-/AddComedianServlet.class
-/ComComServlet.class
